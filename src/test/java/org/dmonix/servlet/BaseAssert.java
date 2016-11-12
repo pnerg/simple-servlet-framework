@@ -15,6 +15,8 @@
  */
 package org.dmonix.servlet;
 
+import junitextensions.OptionAssert;
+import junitextensions.TryAssert;
 import org.junit.Assert;
 
 import java.util.Locale;
@@ -24,7 +26,7 @@ import java.util.Locale;
  * 
  * @author Peter Nerg
  */
-public class BaseAssert extends Assert {
+public class BaseAssert extends Assert implements RequestParser, OptionAssert, TryAssert {
 
     static {
         // Configure language for proper logging outputs

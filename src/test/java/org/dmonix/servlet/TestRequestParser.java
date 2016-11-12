@@ -1,8 +1,6 @@
 package org.dmonix.servlet;
 
 import javascalautils.Try;
-import junitextensions.OptionAssert;
-import junitextensions.TryAssert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -15,7 +13,7 @@ import static org.mockito.Mockito.when;
  * Test the class {@link RequestParser}
  * @author Peter Nerg
  */
-public class TestRequestParser extends BaseAssert implements RequestParser, OptionAssert, TryAssert {
+public class TestRequestParser extends BaseAssert  {
 
     private final HttpServletRequest req = Mockito.mock(HttpServletRequest.class);
 
