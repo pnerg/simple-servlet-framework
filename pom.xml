@@ -58,6 +58,12 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.6.2</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.dmonix.junit</groupId>
 			<artifactId>junit-extensions</artifactId>
 			<version>1.1</version>
