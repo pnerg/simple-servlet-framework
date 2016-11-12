@@ -97,6 +97,12 @@ public class TestResponseBuilder extends BaseAssert implements ResponseBuilder {
     }
 
     @Test
+    public void errorResponseUnsupportedOperation() {
+        Response response = ErrorResponseUnsupportedOperation();
+        assertEquals(405, response.responseCode);
+    }
+
+    @Test
     public void writeResponse() throws IOException {
         HttpServletResponse servletResponse = Mockito.mock(HttpServletResponse.class);
         when(servletResponse.getWriter()).thenReturn(new PrintWriter(new NullWriter()));

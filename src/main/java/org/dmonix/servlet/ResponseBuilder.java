@@ -125,12 +125,20 @@ public interface ResponseBuilder {
     }
 
     /**
-     * Creates an error with code <tt>403</tt> and the message that the path already exists
+     * Creates an error with code <tt>403</tt> and the message that the path already exists.
      * @param path
      * @return The response object
      */
     default Response ErrorResponseResourceAlreadyExists(String path) {
         return ErrorResponse(SC_FORBIDDEN, "The resource depicted by ["+path+"] already exists");
+    }
+
+    /**
+     * Creates an error with code <tt>405</tt> and the operation is not supported.
+     * @return The response object
+     */
+    default Response ErrorResponseUnsupportedOperation() {
+        return ErrorResponse(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Method not allowed");
     }
 
     /**
