@@ -50,7 +50,7 @@ public class TestRequestParser extends BaseAssert  {
     public void fromJson() throws Throwable {
         when(req.getInputStream()).thenReturn(new MockServletInputStream("{\"name\":\"Peter\", \"id\":666}"));
 
-        Try<TestObj> result = fromJson(req, TestObj.class);
+        Try<DummyData> result = fromJson(req, DummyData.class);
         assertSuccess(result);
         result.forEach(r -> {
             assertEquals("Peter", r.name);
@@ -62,16 +62,8 @@ public class TestRequestParser extends BaseAssert  {
     public void fromJson_failParse() throws IOException {
         when(req.getInputStream()).thenReturn(null);
 
-        Try<TestObj> result = fromJson(req, TestObj.class);
+        Try<DummyData> result = fromJson(req, DummyData.class);
         assertFailure(result);
     }
 
-    static class TestObj {
-        private final String name;
-        private final int id;
-        TestObj(String name, int id) {
-            this.name = name;
-            this.id = id;
-        }
-    }
 }
