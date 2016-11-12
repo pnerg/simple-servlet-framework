@@ -15,15 +15,10 @@
  */
 package org.dmonix.servlet;
 
-import com.google.gson.Gson;
 import javascalautils.Option;
 import javascalautils.Try;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.InputStreamReader;
-
-import static javascalautils.OptionCompanion.Option;
-import static javascalautils.TryCompanion.Try;
 
 /**
  * Utilities for parsing HTTP requests
@@ -32,8 +27,6 @@ import static javascalautils.TryCompanion.Try;
  */
 public interface RequestParser {
 
-    Gson gson = new Gson();
-
     /**
      * Get the path info as specified in the URI.
      *
@@ -41,7 +34,7 @@ public interface RequestParser {
      * @return The path info, i.e. the last part of the URI
      */
     default Option<String> getPathInfo(HttpServletRequest req) {
-        return Option(req.getPathInfo()).map(p -> p.substring(1));
+        return ParserUtils.getPathInfo(req);
     }
 
     /**
@@ -52,7 +45,7 @@ public interface RequestParser {
      * @return The parsed object
      */
     default <T> Try<T> fromJson(HttpServletRequest req, Class<T> type) {
-        return fromJson(req, "UTF-8", type);
+        return ParserUtils.fromJson(req, type);
     }
 
     /**
@@ -64,6 +57,6 @@ public interface RequestParser {
      * @return The parsed object
      */
     default <T> Try<T> fromJson(HttpServletRequest req, String charsetName, Class<T> type) {
-        return Try(() -> gson.fromJson(new InputStreamReader(req.getInputStream(), charsetName), type));
+        return ParserUtils.fromJson(req, charsetName, type);
     }
 }
