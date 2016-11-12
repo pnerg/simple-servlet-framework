@@ -17,6 +17,7 @@
 
 	<properties>
 		<javascalautils.version>1.11</javascalautils.version>
+        <jetty.version>6.1.26</jetty.version>
 	</properties>
 	
 	<distributionManagement>
@@ -93,6 +94,16 @@
 			<version>1.10.19</version>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-util</artifactId>
+            <version>${jetty.version}</version>
+        </dependency>
 	</dependencies>
 
 	<build>
