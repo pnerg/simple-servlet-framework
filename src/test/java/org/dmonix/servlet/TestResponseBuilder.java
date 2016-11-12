@@ -21,7 +21,6 @@ import org.mockito.Mockito;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Writer;
 
 import static javascalautils.OptionCompanion.Some;
 import static org.mockito.Mockito.verify;
@@ -127,22 +126,5 @@ public class TestResponseBuilder extends BaseAssert implements ResponseBuilder {
         assertTrue(response.headers().isEmpty());
     }
 
-    private class NullWriter extends Writer {
-
-        @Override
-        public void write(char[] cbuf, int off, int len) throws IOException {
-
-        }
-
-        @Override
-        public void flush() throws IOException {
-
-        }
-
-        @Override
-        public void close() throws IOException {
-
-        }
-    }
 
 }
