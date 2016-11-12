@@ -59,6 +59,18 @@ public class TestRequestParser extends BaseAssert implements RequestParser  {
     }
 
     @Test
+    public void fromJson_withCharset() throws Throwable {
+        when(req.getInputStream()).thenReturn(new MockServletInputStream("{\"name\":\"Peter\", \"id\":666}"));
+
+        Try<DummyData> result = fromJson(req, "UTF-8", DummyData.class);
+        assertSuccess(result);
+        result.forEach(r -> {
+            assertEquals("Peter", r.name);
+            assertEquals(666, r.id);
+        });
+    }
+
+    @Test
     public void fromJson_failParse() throws IOException {
         when(req.getInputStream()).thenReturn(null);
 
