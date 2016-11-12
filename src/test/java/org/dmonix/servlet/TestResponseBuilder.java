@@ -24,7 +24,8 @@ import java.io.PrintWriter;
 import java.io.Writer;
 
 import static javascalautils.OptionCompanion.Some;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Test the class {@link ResponseBuilder}.
