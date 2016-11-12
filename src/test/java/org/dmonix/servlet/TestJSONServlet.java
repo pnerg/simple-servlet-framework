@@ -29,6 +29,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
+ * Tests for the {@link JSONServlet}. <br>
+ * This class tests the default behavior of the servlet implementation. <br>
+ * That is no operations are supported.
  * @author Peter Nerg
  */
 public class TestJSONServlet {

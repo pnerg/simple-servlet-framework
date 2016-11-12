@@ -138,7 +138,7 @@ public interface ResponseBuilder {
      * @return The response object
      */
     default Response ErrorResponseUnsupportedOperation() {
-        return ErrorResponse(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "Method not allowed");
+        return ErrorResponse(SC_METHOD_NOT_ALLOWED, "Method not allowed");
     }
 
     /**
