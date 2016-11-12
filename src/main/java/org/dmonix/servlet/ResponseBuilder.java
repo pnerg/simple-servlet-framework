@@ -146,13 +146,13 @@ public interface ResponseBuilder {
         resp.setStatus(response.responseCode);
 
         //set all headers
-        response.headers().forEach((k,v) -> resp.setHeader(k,v));
+        response.headers().forEach(resp::setHeader);
 
         //set the optional content-type
-        response.mediaType.forEach(mt -> resp.setContentType(mt));
+        response.mediaType.forEach(resp::setContentType);
 
         //set the optional char-encoding
-        response.charEncoding.forEach(ce -> resp.setCharacterEncoding(ce));
+        response.charEncoding.forEach(resp::setCharacterEncoding);
 
         //write any body data
         resp.getWriter().write(response.message);
