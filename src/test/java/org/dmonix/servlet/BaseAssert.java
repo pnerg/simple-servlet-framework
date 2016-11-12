@@ -26,7 +26,7 @@ import java.util.Locale;
  * 
  * @author Peter Nerg
  */
-public class BaseAssert extends Assert implements RequestParser, OptionAssert, TryAssert {
+public class BaseAssert extends Assert implements OptionAssert, TryAssert {
 
     static {
         // Configure language for proper logging outputs

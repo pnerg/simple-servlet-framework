@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
  * Test the class {@link RequestParser}
  * @author Peter Nerg
  */
-public class TestRequestParser extends BaseAssert  {
+public class TestRequestParser extends BaseAssert implements RequestParser  {
 
     private final HttpServletRequest req = Mockito.mock(HttpServletRequest.class);
 
