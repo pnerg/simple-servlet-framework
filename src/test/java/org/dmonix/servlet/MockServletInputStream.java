@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Mocke implementation of a {@link javax.servlet.ServletInputStream} used to provide JSon response data
+ * Mock implementation of a {@link javax.servlet.ServletInputStream} used to provide JSon response data
  * @author Peter Nerg
  */
 public final class MockServletInputStream extends ServletInputStream {

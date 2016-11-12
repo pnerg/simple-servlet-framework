@@ -24,13 +24,24 @@ public class TestResponse extends BaseAssert {
 
     @Test
     public void mediaType() {
-        Response rsp = new Response(666, "Evil is about", Some("text/plain"));
+        Response rsp = new Response(666, "Evil is about", Some("text/plain"), Some("UTF-8"));
         assertSome("text/plain", rsp.mediaType);
     }
 
     @Test
     public void mediaType_notSet() {
         assertNone(response.mediaType);
+    }
+
+    @Test
+    public void charEncoding() {
+        Response rsp = new Response(666, "Evil is about", Some("text/plain"), Some("iso-8859-1"));
+        assertSome("iso-8859-1", rsp.charEncoding);
+    }
+
+    @Test
+    public void charEncoding_notSet() {
+        assertSome("UTF-8", response.charEncoding);
     }
 
     @Test

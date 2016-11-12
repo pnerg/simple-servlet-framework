@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static javascalautils.OptionCompanion.None;
+import static javascalautils.OptionCompanion.Some;
 
 /**
  * Response object containing the response to be sent to the client.
@@ -33,6 +34,7 @@ public class Response {
     final int responseCode;
     final String message;
     final Option<String> mediaType;
+    final Option<String> charEncoding;
     private final Map<String, String> headers = new HashMap<>();
 
     /**
@@ -44,7 +46,7 @@ public class Response {
      *            The body of the response
      */
     public Response(int responseCode, String message) {
-        this(responseCode, message, None());
+        this(responseCode, message, None(), Some("UTF-8"));
     }
 
     /**
@@ -56,11 +58,14 @@ public class Response {
      *            The body of the response
      * @param mediaType
      *            An optional media type of the response data
+     * @param charEncoding
+     *            An optional character encoding of the response data
      */
-    Response(int responseCode, String message, Option<String> mediaType) {
+    Response(int responseCode, String message, Option<String> mediaType, Option<String> charEncoding) {
         this.responseCode = responseCode;
         this.message = message;
         this.mediaType = mediaType;
+        this.charEncoding = charEncoding;
     }
 
     /**
