@@ -29,8 +29,8 @@ import java.io.InputStreamReader;
  * @author Peter Nerg
  * @since 1.0
  */
-abstract class ParserUtils {
-    private static Gson gson = new Gson();
+interface ParserUtils {
+    Gson gson = new Gson();
 
     /**
      * Get the path info as specified in the URI.
