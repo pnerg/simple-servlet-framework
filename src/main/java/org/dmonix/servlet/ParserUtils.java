@@ -29,7 +29,7 @@ import java.io.InputStreamReader;
  * @author Peter Nerg
  * @since 1.0
  */
-class ParserUtils {
+abstract class ParserUtils {
     private static Gson gson = new Gson();
 
     /**
