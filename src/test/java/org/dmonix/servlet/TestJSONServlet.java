@@ -46,25 +46,25 @@ public class TestJSONServlet {
     }
 
     @Test
-    public void get() throws ServletException, IOException {
+    public void doGet() throws ServletException, IOException {
         testServlet.doGet(servletRequest, servletResponse);
         verify(servletResponse).setStatus(405);
     }
 
     @Test
-    public void delete() throws ServletException, IOException {
+    public void doDelete() throws ServletException, IOException {
         testServlet.doDelete(servletRequest, servletResponse);
         verify(servletResponse).setStatus(405);
     }
 
     @Test
-    public void put() throws ServletException, IOException {
+    public void doPut() throws ServletException, IOException {
         testServlet.doPut(servletRequest, servletResponse);
         verify(servletResponse).setStatus(405);
     }
 
     @Test
-    public void post() throws ServletException, IOException {
+    public void doPost() throws ServletException, IOException {
         testServlet.doPost(servletRequest, servletResponse);
         verify(servletResponse).setStatus(405);
     }
