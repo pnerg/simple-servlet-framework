@@ -136,7 +136,7 @@ public interface ResponseBuilder {
     }
 
     /**
-     * Creates an error with code <tt>405</tt> and the operation is not supported.
+     * Creates an error with code <tt>405</tt> stating the operation is not supported.
      * @return The response object
      */
     default Response ErrorResponseUnsupportedOperation() {
