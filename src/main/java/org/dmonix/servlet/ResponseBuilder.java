@@ -25,7 +25,7 @@ import static javascalautils.OptionCompanion.Some;
 import static javax.servlet.http.HttpServletResponse.*;
 
 /**
- * Interface for builing the response to be sent to the client.
+ * Interface for building the response to be sent to the client.
  *
  * @author Peter Nerg
  * @since 1.0
@@ -101,7 +101,7 @@ public interface ResponseBuilder {
      *
      * @param responseCode
      *            The HTTP response code
-     * @param message
+     * @param message The message
      * @return The response object
      */
     default Response ErrorResponse(int responseCode, String message) {
@@ -111,7 +111,7 @@ public interface ResponseBuilder {
     /**
      * Creates an error with a 404 - Not found
      *
-     * @param message
+     * @param message The message
      * @return The response object
      */
     default Response ErrorResponseNotFound(String message) {
@@ -128,7 +128,7 @@ public interface ResponseBuilder {
 
     /**
      * Creates an error with code <tt>403</tt> and the message that the path already exists.
-     * @param path
+     * @param path The path which already existed
      * @return The response object
      */
     default Response ErrorResponseResourceAlreadyExists(String path) {
