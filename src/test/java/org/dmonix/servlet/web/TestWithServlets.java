@@ -54,6 +54,7 @@ public class TestWithServlets extends BaseAssert {
 
         ServletContextHandler context = new ServletContextHandler();
         context.addServlet(new ServletHolder("test", TestServlet.class),"/");
+        context.addServlet(new ServletHolder("test2", TestServletWithAllOps.class),"/allops");
         server.setHandler(context);
 
         server.start();
@@ -130,6 +131,31 @@ public class TestWithServlets extends BaseAssert {
                 containsString("PUT"),
                 containsString("POST"),
                 containsString("DELETE"))));
+    }
+
+    /**
+     * Test the OPTIONS method to verify the we produce the correct method names depending on what the servlet supports
+     * @throws IOException
+     */
+    @Test
+    public void options_forServletWithAllOps() throws IOException {
+        HttpURLConnection http = (HttpURLConnection) serverURI.resolve("/allops").toURL().openConnection();
+        http.setRequestMethod("OPTIONS");
+        http.connect();
+
+        assertEquals(200, http.getResponseCode());
+        String allow = http.getHeaderField("Allow");
+        assertNotNull(allow);
+
+        //assert the servlet supports the expected operations
+        assertThat(allow, allOf(
+                containsString("OPTIONS"),
+                containsString("TRACE"),
+                containsString("GET"),
+                containsString("PUT"),
+                containsString("POST"),
+                containsString("DELETE"),
+                containsString("HEAD")));
     }
 
     private static HttpURLConnection connect(String operation) throws IOException {
