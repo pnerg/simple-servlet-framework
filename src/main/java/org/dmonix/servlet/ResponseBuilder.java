@@ -16,6 +16,7 @@
 package org.dmonix.servlet;
 
 import com.google.gson.Gson;
+import javascalautils.Try;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -24,7 +25,7 @@ import static javascalautils.OptionCompanion.Some;
 import static javax.servlet.http.HttpServletResponse.*;
 
 /**
- * Response object containing the response to be sent to the client.
+ * Interface for builing the response to be sent to the client.
  *
  * @author Peter Nerg
  * @since 1.0
@@ -85,13 +86,14 @@ public interface ResponseBuilder {
     }
 
     /**
-     * Creates an error response with a internal error code.
-     *
-     * @param t The underlying issue
+     * Creates an error response with a internal error code. <br>
+     * Will in practice create an ErrorResponse with the message from the exception.
+     * @param throwable The underlying issue
      * @return The response object
+     * @see #ErrorResponse(int, String)
      */
-    default Response ErrorResponse(Throwable t) {
-        return ErrorResponse(SC_INTERNAL_SERVER_ERROR, t.getMessage());
+    default Response ErrorResponse(Throwable throwable) {
+        return ErrorResponse(SC_INTERNAL_SERVER_ERROR, throwable.getMessage());
     }
 
     /**
@@ -144,8 +146,20 @@ public interface ResponseBuilder {
     /**
      * Write the response to the client.
      *
-     * @param resp
-     * @param response
+     * @param resp The HTTP servlet response object
+     * @param response The response object, either successful or failed
+     * @throws IOException
+     */
+    default void writeResponse(HttpServletResponse resp, Try<Response> response) throws IOException {
+        //orNull will never happen as we've set a recover function
+        writeResponse(resp, response.recover(this::ErrorResponse).orNull());
+    }
+
+    /**
+     * Write the response to the client.
+     *
+     * @param resp The HTTP servlet response object
+     * @param response The response object to be sent to the client
      * @throws IOException
      */
     default void writeResponse(HttpServletResponse resp, Response response) throws IOException {
