@@ -13,23 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dmonix.servlet;
+package org.dmonix.servlet.web;
+
+import org.dmonix.servlet.DummyData;
+import org.dmonix.servlet.JSONServlet;
+import org.dmonix.servlet.Request;
+import org.dmonix.servlet.Response;
+
+import javax.servlet.annotation.WebServlet;
 
 /**
- * Dummy data to use for JSon testing
+ * Simple servlet built with {@link JSONServlet} for testing purposes.
  * @author Peter Nerg
  */
-public class DummyData {
-    public final String name;
-    public final int id;
-
-    public DummyData(String name, int id) {
-        this.name = name;
-        this.id = id;
-    }
-
+@WebServlet(name = "TestServlet", urlPatterns = {"/*"})
+public class TestServlet extends JSONServlet {
     @Override
-    public String toString() {
-        return name+":"+id;
+    protected Response get(Request request) {
+        return ObjectResponse(new DummyData("peter", 69));
     }
+
 }
