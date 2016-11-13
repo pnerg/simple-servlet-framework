@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static javascalautils.TryCompanion.Try;
+
 /**
  * @author Peter Nerg
  */
@@ -28,22 +30,22 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
 
     @Override
     protected final void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        writeResponse(resp, get(new Request(req)));
+        writeResponse(resp, Try(() ->get(new Request(req))));
     }
 
     @Override
     protected final void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        writeResponse(resp, delete(new Request(req)));
+        writeResponse(resp, Try(() -> delete(new Request(req))));
     }
 
     @Override
     protected final void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        writeResponse(resp, post(new Request(req)));
+        writeResponse(resp, Try(() -> post(new Request(req))));
     }
 
     @Override
     protected final void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        writeResponse(resp, put(new Request(req)));
+        writeResponse(resp, Try(() -> put(new Request(req))));
     }
 
     protected Response get(Request request) throws ServletException, IOException {
