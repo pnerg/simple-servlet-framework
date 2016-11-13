@@ -15,6 +15,8 @@
  */
 package org.dmonix.servlet;
 
+import javascalautils.Try;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +38,7 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
 
     @Override
     protected final void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        writeResponse(resp, Try(() -> get(new Request(req))));
+        writeResponse(resp, getWithTry(new Request(req)));
     }
 
     @Override
@@ -89,7 +91,7 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
 
     /**
      * Implements the <tt>GET</tt> method. <br>
-     * Should be override by servlets needing to support this method. <br>
+     * Should be overridden by servlets needing to support this method. <br>
      * If not override a default <tt>405 - Not supported</tt> is returned.
      * @param request The request data
      * @return The response data.
@@ -101,9 +103,24 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
     }
 
     /**
+     * Implements the <tt>GET</tt> method. <br>
+     * Should be overridden by servlets needing to support this method. <br>
+     * If not overridden this method invokes {@link #get(Request)}.
+     * @param request The request data
+     * @return The response data in case of Success, else a Failure
+     * @throws ServletException
+     * @throws IOException
+     * @since 1.1
+     * @see #get(Request)
+     */
+    protected Try<Response> getWithTry(Request request) {
+        return Try(() -> get(request));
+    }
+
+    /**
      * Implements the <tt>DELETE</tt> method. <br>
-     * Should be override by servlets needing to support this method. <br>
-     * If not override a default <tt>405 - Not supported</tt> is returned.
+     * Should be overridden by servlets needing to support this method. <br>
+     * If not overridden a default <tt>405 - Not supported</tt> is returned.
      * @param request The request data
      * @return The response data.
      * @throws ServletException
@@ -115,8 +132,8 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
 
     /**
      * Implements the <tt>POST</tt> method. <br>
-     * Should be override by servlets needing to support this method. <br>
-     * If not override a default <tt>405 - Not supported</tt> is returned.
+     * Should be overridden by servlets needing to support this method. <br>
+     * If not overridden a default <tt>405 - Not supported</tt> is returned.
      * @param request The request data
      * @return The response data.
      * @throws ServletException
@@ -128,8 +145,8 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
 
     /**
      * Implements the <tt>PUT</tt> method. <br>
-     * Should be override by servlets needing to support this method. <br>
-     * If not override a default <tt>405 - Not supported</tt> is returned.
+     * Should be overridden by servlets needing to support this method. <br>
+     * If not overridden a default <tt>405 - Not supported</tt> is returned.
      * @param request The request data
      * @return The response data.
      * @throws ServletException

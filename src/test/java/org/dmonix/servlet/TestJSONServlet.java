@@ -15,6 +15,7 @@
  */
 package org.dmonix.servlet;
 
+import javascalautils.Try;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -34,9 +35,10 @@ import static org.mockito.Mockito.when;
  * That is no operations are supported.
  * @author Peter Nerg
  */
-public class TestJSONServlet {
+public class TestJSONServlet extends BaseAssert {
     private final HttpServletRequest servletRequest = Mockito.mock(HttpServletRequest.class);
     private final HttpServletResponse servletResponse = Mockito.mock(HttpServletResponse.class);
+    private final Request request = new Request(servletRequest);
 
     private final JSONServlet testServlet = new JSONServlet() {};
 
@@ -52,9 +54,24 @@ public class TestJSONServlet {
     }
 
     @Test
+    public void get() throws ServletException, IOException {
+        assertNotSupported(testServlet.get(request));
+    }
+
+    @Test
+    public void getWithTry() throws ServletException, IOException {
+        assertNotSupported(testServlet.getWithTry(request));
+    }
+
+    @Test
     public void doDelete() throws ServletException, IOException {
         testServlet.doDelete(servletRequest, servletResponse);
         verify(servletResponse).setStatus(405);
+    }
+
+    @Test
+    public void delete() throws ServletException, IOException {
+        assertNotSupported(testServlet.delete(request));
     }
 
     @Test
@@ -64,8 +81,27 @@ public class TestJSONServlet {
     }
 
     @Test
+    public void put() throws ServletException, IOException {
+        assertNotSupported(testServlet.put(request));
+    }
+
+    @Test
     public void doPost() throws ServletException, IOException {
         testServlet.doPost(servletRequest, servletResponse);
         verify(servletResponse).setStatus(405);
+    }
+
+    @Test
+    public void post() throws ServletException, IOException {
+        assertNotSupported(testServlet.post(request));
+    }
+
+    private void assertNotSupported(Response response) {
+        assertEquals(405, response.responseCode);
+    }
+
+    private void assertNotSupported(Try<Response> response) {
+        assertSuccess(response);
+        response.forEach(this::assertNotSupported);
     }
 }
