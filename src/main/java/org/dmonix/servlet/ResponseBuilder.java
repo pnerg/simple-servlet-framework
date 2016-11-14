@@ -148,7 +148,7 @@ public interface ResponseBuilder {
      *
      * @param resp The HTTP servlet response object
      * @param response The response object, either successful or failed
-     * @throws IOException
+     * @throws IOException Any exception during processing
      */
     default void writeResponse(HttpServletResponse resp, Try<Response> response) throws IOException {
         //orNull will never happen as we've set a recover function
@@ -160,7 +160,7 @@ public interface ResponseBuilder {
      *
      * @param resp The HTTP servlet response object
      * @param response The response object to be sent to the client
-     * @throws IOException
+     * @throws IOException Any exception during processing
      */
     default void writeResponse(HttpServletResponse resp, Response response) throws IOException {
         //set the response code, e.g. 200

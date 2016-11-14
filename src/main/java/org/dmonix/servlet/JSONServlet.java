@@ -95,8 +95,8 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
      * If not override a default <tt>405 - Not supported</tt> is returned.
      * @param request The request data
      * @return The response data.
-     * @throws ServletException
-     * @throws IOException
+     * @throws ServletException Any exception during processing
+     * @throws IOException Any exception during processing
      */
     protected Response get(Request request) throws ServletException, IOException {
         return ErrorResponseUnsupportedOperation();
@@ -108,8 +108,6 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
      * If not overridden this method invokes {@link #get(Request)}.
      * @param request The request data
      * @return The response data in case of Success, else a Failure
-     * @throws ServletException
-     * @throws IOException
      * @since 1.1
      * @see #get(Request)
      */
@@ -123,8 +121,8 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
      * If not overridden a default <tt>405 - Not supported</tt> is returned.
      * @param request The request data
      * @return The response data.
-     * @throws ServletException
-     * @throws IOException
+     * @throws ServletException Any exception during processing
+     * @throws IOException Any exception during processing
      */
     protected Response delete(Request request) throws ServletException, IOException {
         return ErrorResponseUnsupportedOperation();
@@ -136,8 +134,8 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
      * If not overridden a default <tt>405 - Not supported</tt> is returned.
      * @param request The request data
      * @return The response data.
-     * @throws ServletException
-     * @throws IOException
+     * @throws ServletException Any exception during processing
+     * @throws IOException Any exception during processing
      */
     protected Response post(Request request) throws ServletException, IOException {
         return ErrorResponseUnsupportedOperation();
@@ -149,8 +147,8 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
      * If not overridden a default <tt>405 - Not supported</tt> is returned.
      * @param request The request data
      * @return The response data.
-     * @throws ServletException
-     * @throws IOException
+     * @throws ServletException Any exception during processing
+     * @throws IOException Any exception during processing
      */
     protected Response put(Request request) throws ServletException, IOException {
         return ErrorResponseUnsupportedOperation();
