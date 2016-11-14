@@ -26,10 +26,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.contains;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.dmonix.servlet.DummyServlets.*;
 
 /**
  * Tests for the {@link JSONServlet}. <br>
@@ -117,6 +121,18 @@ public class TestJSONServlet extends BaseAssert {
     public void doOptions() throws ServletException, IOException {
         testServlet.doOptions(servletRequest, servletResponse);
         verify(servletResponse).setHeader(eq("Allow"), anyString());
+    }
+
+    @Test
+    public void doOptions_AllOps() throws ServletException, IOException {
+        new ServletWithAllOps().doOptions(servletRequest, servletResponse);
+        verify(servletResponse).setHeader(eq("Allow"), anyString());
+    }
+
+    @Test
+    public void doOptions_AllTryOps() throws ServletException, IOException {
+        new ServletWithAllTryOps().doOptions(servletRequest, servletResponse);
+        verify(servletResponse).setHeader(eq("Allow"), contains("POST"));
     }
 
     private void assertNotSupported(Response response) {
