@@ -61,7 +61,7 @@ public class TestJSONServlet extends BaseAssert {
     }
 
     @Test
-    public void getWithTry() throws ServletException, IOException {
+    public void getWithTry() {
         assertNotSupported(testServlet.getWithTry(request));
     }
 
@@ -77,7 +77,7 @@ public class TestJSONServlet extends BaseAssert {
     }
 
     @Test
-    public void deleteWithTry() throws ServletException, IOException {
+    public void deleteWithTry() {
         assertNotSupported(testServlet.deleteWithTry(request));
     }
 
@@ -101,6 +101,11 @@ public class TestJSONServlet extends BaseAssert {
     @Test
     public void post() throws ServletException, IOException {
         assertNotSupported(testServlet.post(request));
+    }
+
+    @Test
+    public void postWithTry() {
+        assertNotSupported(testServlet.postWithTry(request));
     }
 
     @Test
