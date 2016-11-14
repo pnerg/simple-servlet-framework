@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.dmonix.servlet.web;
+package org.dmonix.servlet;
 
 import com.google.gson.Gson;
-import org.dmonix.servlet.BaseAssert;
-import org.dmonix.servlet.DummyData;
+import org.dmonix.servlet.DummyServlets.GetOnlyServlet;
+import org.dmonix.servlet.DummyServlets.ServletWithAllOps;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -53,8 +53,8 @@ public class TestWithServlets extends BaseAssert {
         server.addConnector(connector);
 
         ServletContextHandler context = new ServletContextHandler();
-        context.addServlet(new ServletHolder("test", TestServlet.class),"/");
-        context.addServlet(new ServletHolder("test2", TestServletWithAllOps.class),"/allops");
+        context.addServlet(new ServletHolder("test", GetOnlyServlet.class),"/");
+        context.addServlet(new ServletHolder("test2", ServletWithAllOps.class),"/allops");
         server.setHandler(context);
 
         server.start();
