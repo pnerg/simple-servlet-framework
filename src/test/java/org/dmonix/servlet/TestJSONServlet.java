@@ -93,6 +93,11 @@ public class TestJSONServlet extends BaseAssert {
     }
 
     @Test
+    public void putWithTry() {
+        assertNotSupported(testServlet.putWithTry(request));
+    }
+
+    @Test
     public void doPost() throws ServletException, IOException {
         testServlet.doPost(servletRequest, servletResponse);
         verify(servletResponse).setStatus(405);

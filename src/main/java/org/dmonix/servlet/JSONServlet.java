@@ -186,4 +186,18 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
     protected Response put(Request request) throws ServletException, IOException {
         return ErrorResponseUnsupportedOperation();
     }
+
+    /**
+     * Implements the <tt>PUT</tt> method. <br>
+     * Should be overridden by servlets needing to support this method. <br>
+     * If not overridden this method invokes {@link #put(Request)}. <br>
+     * In other words this method takes precedence over {@link #put(Request)} so overriding both will not make sense.
+     * @param request The request data
+     * @return The response data in case of Success, else a Failure
+     * @since 1.1
+     * @see #get(Request)
+     */
+    protected Try<Response> putWithTry(Request request) {
+        return Try(() -> put(request));
+    }
 }
