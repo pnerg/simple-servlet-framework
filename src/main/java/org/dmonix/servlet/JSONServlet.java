@@ -105,7 +105,8 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
     /**
      * Implements the <tt>GET</tt> method. <br>
      * Should be overridden by servlets needing to support this method. <br>
-     * If not overridden this method invokes {@link #get(Request)}.
+     * If not overridden this method invokes {@link #get(Request)}. <br>
+     * In other words this method takes precedence over {@link #get(Request)} so overriding both will not make sense.
      * @param request The request data
      * @return The response data in case of Success, else a Failure
      * @since 1.1
@@ -126,6 +127,20 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
      */
     protected Response delete(Request request) throws ServletException, IOException {
         return ErrorResponseUnsupportedOperation();
+    }
+
+    /**
+     * Implements the <tt>DELETE</tt> method. <br>
+     * Should be overridden by servlets needing to support this method. <br>
+     * If not overridden this method invokes {@link #delete(Request)}. <br>
+     * In other words this method takes precedence over {@link #delete(Request)} so overriding both will not make sense.
+     * @param request The request data
+     * @return The response data in case of Success, else a Failure
+     * @since 1.1
+     * @see #get(Request)
+     */
+    protected Try<Response> deleteWithTry(Request request) {
+        return Try(() -> delete(request));
     }
 
     /**

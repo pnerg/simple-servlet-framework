@@ -77,6 +77,11 @@ public class TestJSONServlet extends BaseAssert {
     }
 
     @Test
+    public void deleteWithTry() throws ServletException, IOException {
+        assertNotSupported(testServlet.deleteWithTry(request));
+    }
+
+    @Test
     public void doPut() throws ServletException, IOException {
         testServlet.doPut(servletRequest, servletResponse);
         verify(servletResponse).setStatus(405);
