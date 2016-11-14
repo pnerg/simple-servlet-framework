@@ -68,25 +68,29 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
         allow.append("TRACE");
         allow.append(", ");
         //if GET is supported then HEAD is also supported
-        if (methods.contains("get")) {
+        if (isOperationSupported(methods, "get")) {
             allow.append("GET");
             allow.append(", ");
             allow.append("HEAD");
         }
-        if (methods.contains("post")) {
+        if (isOperationSupported(methods, "post")) {
             allow.append(", ");
             allow.append("POST");
         }
-        if (methods.contains("put")) {
+        if (isOperationSupported(methods, "put")) {
             allow.append(", ");
             allow.append("PUT");
         }
-        if (methods.contains("delete")) {
+        if (isOperationSupported(methods, "delete")) {
             allow.append(", ");
             allow.append("DELETE");
         }
 
         resp.setHeader("Allow", allow.toString());
+    }
+
+    private boolean isOperationSupported(Set<String> methods, String operation) {
+        return methods.contains(operation) || methods.contains(operation+"WithTry");
     }
 
     /**
@@ -154,6 +158,20 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
      */
     protected Response post(Request request) throws ServletException, IOException {
         return ErrorResponseUnsupportedOperation();
+    }
+
+    /**
+     * Implements the <tt>POST</tt> method. <br>
+     * Should be overridden by servlets needing to support this method. <br>
+     * If not overridden this method invokes {@link #post(Request)}. <br>
+     * In other words this method takes precedence over {@link #post(Request)} so overriding both will not make sense.
+     * @param request The request data
+     * @return The response data in case of Success, else a Failure
+     * @since 1.1
+     * @see #get(Request)
+     */
+    protected Try<Response> postWithTry(Request request) {
+        return Try(() -> post(request));
     }
 
     /**
