@@ -42,7 +42,7 @@ public class TestJSONServlet extends BaseAssert {
     private final HttpServletResponse servletResponse = Mockito.spy(HttpServletResponse.class);
     private final Request request = new Request(servletRequest);
 
-    private final JSONServlet testServlet = new JSONServlet() {};
+    private final JSONServlet testServlet = new DummyServlets.NoOperationsServlet();
 
     @Before
     public void before() throws Exception {
