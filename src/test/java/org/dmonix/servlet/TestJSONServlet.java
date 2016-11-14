@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -37,7 +39,7 @@ import static org.mockito.Mockito.when;
  */
 public class TestJSONServlet extends BaseAssert {
     private final HttpServletRequest servletRequest = Mockito.mock(HttpServletRequest.class);
-    private final HttpServletResponse servletResponse = Mockito.mock(HttpServletResponse.class);
+    private final HttpServletResponse servletResponse = Mockito.spy(HttpServletResponse.class);
     private final Request request = new Request(servletRequest);
 
     private final JSONServlet testServlet = new JSONServlet() {};
@@ -94,6 +96,12 @@ public class TestJSONServlet extends BaseAssert {
     @Test
     public void post() throws ServletException, IOException {
         assertNotSupported(testServlet.post(request));
+    }
+
+    @Test
+    public void doOptions() throws ServletException, IOException {
+        testServlet.doOptions(servletRequest, servletResponse);
+        verify(servletResponse).setHeader(eq("Allow"), anyString());
     }
 
     private void assertNotSupported(Response response) {
