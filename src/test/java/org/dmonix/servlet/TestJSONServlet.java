@@ -16,6 +16,8 @@
 package org.dmonix.servlet;
 
 import javascalautils.Try;
+import org.dmonix.servlet.DummyServlets.ServletWithAllOps;
+import org.dmonix.servlet.DummyServlets.ServletWithAllTryOps;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -26,14 +28,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.contains;
-import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import org.dmonix.servlet.DummyServlets.*;
 
 /**
  * Tests for the {@link JSONServlet}. <br>

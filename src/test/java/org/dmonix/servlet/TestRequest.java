@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import javax.servlet.http.HttpServletRequest;
+
 import static org.mockito.Mockito.when;
 
 /**
