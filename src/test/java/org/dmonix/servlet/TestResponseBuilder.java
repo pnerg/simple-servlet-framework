@@ -72,6 +72,14 @@ public class TestResponseBuilder extends BaseAssert implements ResponseBuilder {
     public void errorResponse() {
         Response response = ErrorResponse(new Exception("Error, terror!"));
         assertEquals(500, response.responseCode);
+        assertEquals("Error, terror!", response.message);
+    }
+
+    @Test
+    public void errorResponse_withJSONServletException() {
+        Response response = ErrorResponse(new JSONServletException(ErrorResponseNotFound("No such data")));
+        assertEquals(404, response.responseCode);
+        assertEquals("No such data", response.message);
     }
 
     @Test

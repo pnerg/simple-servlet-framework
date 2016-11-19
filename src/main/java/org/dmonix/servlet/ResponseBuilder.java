@@ -96,14 +96,18 @@ public interface ResponseBuilder {
     }
 
     /**
-     * Creates an error response with a internal error code. <br>
-     * Will in practice create an ErrorResponse with the message from the exception.
+     * Creates an error response with a error code. <br>
+     * If the throwable is of type {@link JSONServletException} then the Response for that exception is used, else
+     * an internal error code is returned using the message from the exception as response body.
      * @param throwable The underlying issue
      * @return The response object
      * @see #ErrorResponse(int, String)
      */
     default Response ErrorResponse(Throwable throwable) {
-        return ErrorResponse(SC_INTERNAL_SERVER_ERROR, throwable.getMessage());
+        if(throwable instanceof JSONServletException)
+            return ((JSONServletException)throwable).response;
+        else
+            return ErrorResponse(SC_INTERNAL_SERVER_ERROR, throwable.getMessage());
     }
 
     /**
