@@ -48,6 +48,11 @@ public class TestResponseBuilder extends BaseAssert implements ResponseBuilder {
     }
 
     @Test
+    public void okResponse() {
+        assertEmptyResponse(200, OKResponse());
+    }
+
+    @Test
     public void objectResponse() {
         Response response = ObjectResponse(new DummyData("peter", 69));
         assertEquals(200, response.responseCode);

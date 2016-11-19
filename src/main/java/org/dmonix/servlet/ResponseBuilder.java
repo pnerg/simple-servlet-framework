@@ -45,6 +45,16 @@ public interface ResponseBuilder {
     }
 
     /**
+     * Creates an empty response with only 200 - OK
+     *
+     * @return The response object
+     * @since 1.3
+     */
+    default Response OKResponse() {
+        return EmptyResponse(SC_OK);
+    }
+
+    /**
      * Creates an empty response with only 202 - Accepted
      *
      * @return The response object
