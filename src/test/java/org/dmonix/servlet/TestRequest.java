@@ -43,6 +43,12 @@ public class TestRequest extends BaseAssert {
     }
 
     @Test
+    public void getPathInfoAsTry() {
+        when(servletRequest.getPathInfo()).thenReturn("/the-path");
+        assertSuccess("the-path", request.getPathInfoAsTry());
+    }
+
+    @Test
     public void fromJson() throws Throwable {
         when(servletRequest.getInputStream()).thenReturn(new MockServletInputStream("{\"name\":\"Peter\", \"id\":666}"));
 

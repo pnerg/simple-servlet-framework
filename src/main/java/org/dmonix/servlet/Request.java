@@ -50,6 +50,16 @@ public final class Request {
     }
 
     /**
+     * Get the path info as specified in the URI. <br>
+     * Returns a Success containing the path if such exists, else a Failure with a JSONServlet exception containing an error response
+     * @return The path info, i.e. the last part of the URI
+     * @since 1.3
+     */
+    public Try<String> getPathInfoAsTry() {
+        return ParserUtils.getPathInfoAsTry(request);
+    }
+
+    /**
      * Parses an object from the json stream in the HTTP request
      * @param type The type to parse
      * @param <T> The return type

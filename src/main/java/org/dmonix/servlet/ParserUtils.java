@@ -16,10 +16,7 @@
 package org.dmonix.servlet;
 
 import com.google.gson.Gson;
-import javascalautils.Option;
-import javascalautils.OptionCompanion;
-import javascalautils.Try;
-import javascalautils.TryCompanion;
+import javascalautils.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.InputStreamReader;
@@ -40,6 +37,17 @@ interface ParserUtils {
      */
     static Option<String> getPathInfo(HttpServletRequest req) {
         return OptionCompanion.Option(req.getPathInfo()).map(p -> p.substring(1));
+    }
+
+    /**
+     * Get the path info as specified in the URI. <br>
+     * Returns a Success containing the path if such exists, else a Failure with a JSONServlet exception containing an error response
+     * @param req The HTTP request
+     * @return The path info, i.e. the last part of the URI
+     * @since 1.3
+     */
+    static Try<String> getPathInfoAsTry(HttpServletRequest req) {
+        return getPathInfo(req).map(path -> Try.apply(path)).getOrElse(() -> new Failure<>(JSONServletException.MissingPathException()));
     }
 
     /**

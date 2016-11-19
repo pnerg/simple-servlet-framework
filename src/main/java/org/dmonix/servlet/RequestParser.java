@@ -15,15 +15,10 @@
  */
 package org.dmonix.servlet;
 
-import javascalautils.Failure;
 import javascalautils.Option;
 import javascalautils.Try;
 
 import javax.servlet.http.HttpServletRequest;
-
-import static javascalautils.TryCompanion.Success;
-import static javascalautils.TryCompanion.Failure;
-import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 
 /**
  * Utilities for parsing HTTP requests
@@ -50,7 +45,7 @@ public interface RequestParser {
      * @since 1.3
      */
     default Try<String> getPathInfoAsTry(HttpServletRequest req) {
-        return getPathInfo(req).map(path -> Try.apply(path)).getOrElse(() -> new Failure<>(JSONServletException.MissingPathException()));
+        return ParserUtils.getPathInfoAsTry(req);
     }
 
     /**
