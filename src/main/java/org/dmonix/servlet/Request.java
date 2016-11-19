@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 public final class Request {
     private final HttpServletRequest request;
 
-    Request(HttpServletRequest request) {
+    public Request(HttpServletRequest request) {
         this.request = request;
     }
 

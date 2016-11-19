@@ -31,10 +31,19 @@ import static javascalautils.OptionCompanion.Some;
  * @since 1.0
  */
 public class Response {
-    final int responseCode;
-    final String message;
-    final Option<String> mediaType;
-    final Option<String> charEncoding;
+    /** The HTTP response code for the response.*/
+    public final int responseCode;
+
+    /** The message/body for the response.*/
+    public final String message;
+
+    /** The optional media type for the response for the response.*/
+    public final Option<String> mediaType;
+
+    /** The optional character encoding for the response.*/
+    public final Option<String> charEncoding;
+
+    /** The headers for the response.*/
     private final Map<String, String> headers = new HashMap<>();
 
     /**
