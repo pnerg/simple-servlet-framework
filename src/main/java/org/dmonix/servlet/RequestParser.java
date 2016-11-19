@@ -15,10 +15,15 @@
  */
 package org.dmonix.servlet;
 
+import javascalautils.Failure;
 import javascalautils.Option;
 import javascalautils.Try;
 
 import javax.servlet.http.HttpServletRequest;
+
+import static javascalautils.TryCompanion.Success;
+import static javascalautils.TryCompanion.Failure;
+import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 
 /**
  * Utilities for parsing HTTP requests
@@ -35,6 +40,17 @@ public interface RequestParser {
      */
     default Option<String> getPathInfo(HttpServletRequest req) {
         return ParserUtils.getPathInfo(req);
+    }
+
+    /**
+     * Get the path info as specified in the URI. <br>
+     * Returns a Success containing the path if such exists, else a Failure with a JSONServlet exception containing an error response
+     * @param req The HTTP request
+     * @return The path info, i.e. the last part of the URI
+     * @since 1.3
+     */
+    default Try<String> getPathInfoAsTry(HttpServletRequest req) {
+        return getPathInfo(req).map(path -> Try.apply(path)).getOrElse(() -> new Failure<>(JSONServletException.MissingPathException()));
     }
 
     /**

@@ -47,6 +47,20 @@ public class TestRequestParser extends BaseAssert implements RequestParser  {
     }
 
     @Test
+    public void getPathInfoAsTry_noPath() {
+        when(req.getPathInfo()).thenReturn(null);
+
+        assertFailure(getPathInfoAsTry(req));
+    }
+
+    @Test
+    public void getPathInfoAsTry_withPath() {
+        when(req.getPathInfo()).thenReturn("/the-path");
+
+        assertSuccess("the-path", getPathInfoAsTry(req));
+    }
+
+    @Test
     public void fromJson() throws Throwable {
         when(req.getInputStream()).thenReturn(new MockServletInputStream("{\"name\":\"Peter\", \"id\":666}"));
 
