@@ -15,6 +15,8 @@
  */
 package org.dmonix.servlet;
 
+import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
+
 /**
  * Special exception to be used in Try clauses that are failed. <br>
  * The point is to be able to return a Failure containing this exception and get an automated rendering out the
@@ -31,6 +33,14 @@ public final class JSONServletException extends Exception {
 
     public JSONServletException(Response response) {
         this.response = response;
+    }
+
+    /**
+     * Creates an exception containing error code 400 with the message "missing path"
+     * @return The exception
+     */
+    public static JSONServletException MissingPathException() {
+        return new JSONServletException(new Response(SC_BAD_REQUEST, "Missing path"));
     }
 
 }
