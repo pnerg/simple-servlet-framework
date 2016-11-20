@@ -36,7 +36,7 @@ public final class JSONServletException extends Exception {
     }
 
     /**
-     * Creates an exception containing error code 400 with the message "missing path"
+     * Creates an exception containing error code <tt>400</tt> with the message <tt>missing path</tt>
      * @return The exception
      */
     public static JSONServletException MissingPathException() {
