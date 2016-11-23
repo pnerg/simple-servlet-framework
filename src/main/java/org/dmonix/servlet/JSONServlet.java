@@ -66,9 +66,9 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
         allow.append("OPTIONS");
         allow.append(", ");
         allow.append("TRACE");
-        allow.append(", ");
         //if GET is supported then HEAD is also supported
         if (isOperationSupported(methods, "get")) {
+            allow.append(", ");
             allow.append("GET");
             allow.append(", ");
             allow.append("HEAD");
