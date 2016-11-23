@@ -43,17 +43,17 @@ public abstract class JSONServlet extends HttpServlet implements RequestParser, 
 
     @Override
     protected final void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        writeResponse(resp, Try(() -> delete(new Request(req))));
+        writeResponse(resp, deleteWithTry(new Request(req)));
     }
 
     @Override
     protected final void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        writeResponse(resp, Try(() -> post(new Request(req))));
+        writeResponse(resp, postWithTry(new Request(req)));
     }
 
     @Override
     protected final void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        writeResponse(resp, Try(() -> put(new Request(req))));
+        writeResponse(resp, putWithTry(new Request(req)));
     }
 
     @Override

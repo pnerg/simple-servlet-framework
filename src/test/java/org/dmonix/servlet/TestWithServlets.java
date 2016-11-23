@@ -16,8 +16,7 @@
 package org.dmonix.servlet;
 
 import com.google.gson.Gson;
-import org.dmonix.servlet.DummyServlets.GetOnlyServlet;
-import org.dmonix.servlet.DummyServlets.ServletWithAllOps;
+import org.dmonix.servlet.DummyServlets.*;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -55,6 +54,7 @@ public class TestWithServlets extends BaseAssert {
         ServletContextHandler context = new ServletContextHandler();
         context.addServlet(new ServletHolder("test", GetOnlyServlet.class),"/");
         context.addServlet(new ServletHolder("test2", ServletWithAllOps.class),"/allops");
+        context.addServlet(new ServletHolder("test3", ServletWithAllTryOps.class),"/allopstry");
         server.setHandler(context);
 
         server.start();
@@ -139,9 +139,7 @@ public class TestWithServlets extends BaseAssert {
      */
     @Test
     public void options_forServletWithAllOps() throws IOException {
-        HttpURLConnection http = (HttpURLConnection) serverURI.resolve("/allops").toURL().openConnection();
-        http.setRequestMethod("OPTIONS");
-        http.connect();
+        HttpURLConnection http = connect("OPTIONS", "/allops");
 
         assertEquals(200, http.getResponseCode());
         String allow = http.getHeaderField("Allow");
@@ -158,8 +156,36 @@ public class TestWithServlets extends BaseAssert {
                 containsString("HEAD")));
     }
 
+    @Test
+    public void getWithTry() throws IOException {
+        HttpURLConnection http = connect("GET", "/allopstry");
+        assertEquals(200, http.getResponseCode());
+    }
+
+    @Test
+    public void putWithTry() throws IOException {
+        HttpURLConnection http = connect("PUT", "/allopstry");
+        assertEquals(202, http.getResponseCode());
+    }
+
+    @Test
+    public void postWithTry() throws IOException {
+        HttpURLConnection http = connect("POST", "/allopstry");
+        assertEquals(202, http.getResponseCode());
+    }
+
+    @Test
+    public void deleteWithTry() throws IOException {
+        HttpURLConnection http = connect("DELETE", "/allopstry");
+        assertEquals(202, http.getResponseCode());
+    }
+
     private static HttpURLConnection connect(String operation) throws IOException {
-        HttpURLConnection http = (HttpURLConnection) serverURI.resolve("/").toURL().openConnection();
+        return connect(operation, "/");
+    }
+
+    private static HttpURLConnection connect(String operation, String path) throws IOException {
+        HttpURLConnection http = (HttpURLConnection) serverURI.resolve(path).toURL().openConnection();
         http.setRequestMethod(operation);
         http.connect();
         return http;
