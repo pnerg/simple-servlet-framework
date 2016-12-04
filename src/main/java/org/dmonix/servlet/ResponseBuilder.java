@@ -161,7 +161,7 @@ public interface ResponseBuilder {
      * Creates an error with code <tt>401</tt> stating the operation/user was not authorized.
      * @param message The message for the response
      * @return The response object
-     * @since 1.4
+     * @since 1.5
      */
     default Response ErrorResponseUnauthorized(String message) {
         return ErrorResponse(SC_UNAUTHORIZED, message);

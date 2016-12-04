@@ -40,7 +40,7 @@ public class JSONServletException extends Exception {
      * Creates an exception containing error code <tt>401</tt> with the provided message.
      * @param message The message for the response
      * @return The exception
-     * @since 1.4
+     * @since 1.5
      */
     public static JSONServletException UnauthorizedException(String message) {
         return new JSONServletException(new Response(SC_UNAUTHORIZED, message));
