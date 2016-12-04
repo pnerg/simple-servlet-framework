@@ -26,7 +26,7 @@ import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
  * @author Peter Nerg
  * @since 1.3
  */
-public final class JSONServletException extends Exception {
+public class JSONServletException extends Exception {
 
     static final long serialVersionUID = 923874239472389472L;
     final Response response;
