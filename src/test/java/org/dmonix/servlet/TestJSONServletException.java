@@ -28,4 +28,10 @@ public class TestJSONServletException extends BaseAssert {
         JSONServletException ex = JSONServletException.MissingPathException();
         assertEquals(400, ex.response.responseCode);
     }
+
+    @Test
+    public void unauthorizedException() {
+        JSONServletException ex = JSONServletException.UnauthorizedException("Invalid user/psw");
+        assertEquals(401, ex.response.responseCode);
+    }
 }

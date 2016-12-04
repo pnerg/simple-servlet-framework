@@ -16,6 +16,7 @@
 package org.dmonix.servlet;
 
 import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
+import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 
 /**
  * Special exception to be used in Try clauses that are failed. <br>
@@ -33,6 +34,16 @@ public class JSONServletException extends Exception {
 
     public JSONServletException(Response response) {
         this.response = response;
+    }
+
+    /**
+     * Creates an exception containing error code <tt>401</tt> with the provided message.
+     * @param message The message for the response
+     * @return The exception
+     * @since 1.4
+     */
+    public static JSONServletException UnauthorizedException(String message) {
+        return new JSONServletException(new Response(SC_UNAUTHORIZED, message));
     }
 
     /**
