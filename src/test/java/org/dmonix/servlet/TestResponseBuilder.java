@@ -115,6 +115,12 @@ public class TestResponseBuilder extends BaseAssert implements ResponseBuilder {
     }
 
     @Test
+    public void errorResponseUnauthorized() {
+        Response response = ErrorResponseUnauthorized("Invalid user/psw");
+        assertEquals(401, response.responseCode);
+    }
+
+    @Test
     public void writeResponse() throws IOException {
         HttpServletResponse servletResponse = Mockito.mock(HttpServletResponse.class);
         when(servletResponse.getWriter()).thenReturn(new PrintWriter(new NullWriter()));
