@@ -6,7 +6,7 @@
 	<groupId>org.dmonix.servlet</groupId>
 	<artifactId>simple-servlet-framework</artifactId>
 	<name>Simple Servlet Framework</name>
-	<version>1.6</version>
+	<version>1.7-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<description>A really simple servlet framework</description>
 	<url>https://github.com/pnerg/simple-servlet-framework</url>
