@@ -17,6 +17,8 @@ package org.dmonix.servlet;
 
 import org.junit.Test;
 
+import javax.servlet.http.Cookie;
+
 import static javascalautils.OptionCompanion.Some;
 
 /**
@@ -71,4 +73,18 @@ public class TestResponse extends BaseAssert {
         assertEquals("wohoo", response.headers().get("Token"));
     }
 
+    @Test
+    public void cookies_empty() {
+        assertTrue(response.cookies().isEmpty());
+    }
+
+    @Test
+    public void cookies() {
+        Cookie expected = new Cookie("test", "someval");
+        response.addCookie(expected);
+        assertEquals(1, response.cookies().size());
+
+        Cookie stored = response.cookies().iterator().next();
+        assertEquals(expected.getName(), stored.getName());
+    }
 }

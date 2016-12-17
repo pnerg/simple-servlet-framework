@@ -17,9 +17,8 @@ package org.dmonix.servlet;
 
 import javascalautils.Option;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.Cookie;
+import java.util.*;
 
 import static javascalautils.OptionCompanion.None;
 import static javascalautils.OptionCompanion.Some;
@@ -45,6 +44,9 @@ public class Response {
 
     /** The headers for the response.*/
     private final Map<String, String> headers = new HashMap<>();
+
+    /** The cookies for the response.*/
+    private final Set<Cookie> cookies = new HashSet<>();
 
     /**
      * Creates an instance
@@ -92,5 +94,23 @@ public class Response {
      */
     public Map<String, String> headers() {
         return Collections.unmodifiableMap(headers);
+    }
+
+    /**
+     * Adds a cookie to the HTTP response.
+     * @param cookie The cookie to add
+     * @since 1.6
+     */
+    public void addCookie(Cookie cookie) {
+        cookies.add(cookie);
+    }
+
+    /**
+     * Get all the cookies for the HTTP response
+     * @return
+     * @since 1.6
+     */
+    public Set<Cookie> cookies() {
+        return Collections.unmodifiableSet(cookies);
     }
 }
