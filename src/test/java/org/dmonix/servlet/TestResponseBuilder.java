@@ -18,6 +18,7 @@ package org.dmonix.servlet;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -127,12 +128,15 @@ public class TestResponseBuilder extends BaseAssert implements ResponseBuilder {
 
         Response response = new Response(666, "Evil is about", Some("text/plain"), Some("UTF-8"));
         response.addHeader("Token", "some-value");
+        Cookie cookie = new Cookie("test", "test");
+        response.addCookie(cookie);
         writeResponse(servletResponse, response);
 
         verify(servletResponse).setHeader("Token", "some-value");
         verify(servletResponse).setStatus(response.responseCode);
         verify(servletResponse).setContentType("text/plain");
         verify(servletResponse).setCharacterEncoding("UTF-8");
+        verify(servletResponse).addCookie(cookie);
     }
 
     private void assertEmptyResponse(int responseCode, Response response) {

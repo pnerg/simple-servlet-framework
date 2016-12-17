@@ -199,6 +199,9 @@ public interface ResponseBuilder {
         //set the optional char-encoding
         response.charEncoding.forEach(resp::setCharacterEncoding);
 
+        //add any optional cookies
+        response.cookies().forEach(resp::addCookie);
+
         //write any body data
         resp.getWriter().write(response.message);
     }
