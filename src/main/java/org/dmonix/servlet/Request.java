@@ -18,7 +18,13 @@ package org.dmonix.servlet;
 import javascalautils.Option;
 import javascalautils.Try;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import static javascalautils.OptionCompanion.Option;
 
 /**
  * Wrapper for the {@link HttpServletRequest} class.
@@ -38,6 +44,18 @@ public final class Request {
      */
     public HttpServletRequest request() {
         return request;
+    }
+
+    /**
+     * Get all the cookies from the request. <br>
+     * In contrast to the <tt>getCookies</tt> method in HTTPServletRequest this won't return null
+     * @return The cookies, empty if no cookies
+     * @since 1.6
+     */
+    public List<Cookie> cookies() {
+        return Option(request().getCookies()). //wrap stupid null return in Option
+                map(cookies -> Arrays.asList(cookies)). //map the array to a list
+                getOrElse(() -> Collections.EMPTY_LIST); //in case the array was null, return empty list
     }
 
     /**

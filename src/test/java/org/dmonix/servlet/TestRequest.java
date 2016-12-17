@@ -19,7 +19,10 @@ import javascalautils.Try;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
 
 import static org.mockito.Mockito.when;
 
@@ -34,6 +37,20 @@ public class TestRequest extends BaseAssert {
     @Test
     public void request() {
         assertNotNull(request.request());
+    }
+
+    @Test
+    public void cookies_empty() {
+        assertTrue(request.cookies().isEmpty());
+    }
+
+    @Test
+    public void cookies() {
+        Cookie expected = new Cookie("test", "value");
+        when(servletRequest.getCookies()).thenReturn(new Cookie[]{expected});
+        List<Cookie> cookies = request.cookies();
+        assertEquals(1, cookies.size());
+        assertEquals(expected.getName(), cookies.iterator().next().getName());
     }
 
     @Test
